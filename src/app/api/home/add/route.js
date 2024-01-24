@@ -1,6 +1,6 @@
-import Home from "@/models/Home";
 import connectToDB from "@/database";
-import { NexRensponse, NextResponse } from "next/server";
+import Home from "@/models/Home";
+import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +13,7 @@ export async function POST(req) {
     if (saveData) {
       return NextResponse.json({
         success: true,
-        message: "Berhasil",
+        message: "Data saved successfully",
       });
     } else {
       return NextResponse.json({

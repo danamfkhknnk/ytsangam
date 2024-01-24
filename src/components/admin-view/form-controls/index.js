@@ -16,7 +16,7 @@ export default function FormControls({ controls, formData, setFormData }) {
             [controlItem.name]: e.target.value,
           });
         }}
-        className="shadow border rounded w-full py-2 px-3 text-gray-70 tracking-wide focus:outline-none focus:shadow-outline"
+        className="shadow border rounded w-full py-2 px-3 text-gray-700 tracking-wide focus:outline-none focus:shadow-outline"
       />
     </div>
   ));

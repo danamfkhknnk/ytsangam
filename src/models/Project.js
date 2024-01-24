@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const HomeSchema = new mongoose.Schema(
+const ProjectSchema = new mongoose.Schema(
   {
     name: String,
     website: String,
@@ -10,6 +10,6 @@ const HomeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Home = mongoose.models.Home || mongoose.model("Home", HomeSchema);
+const Project = mongoose.models.Project || mongoose.model("Project", ProjectSchema);
 
-export default Home;
+export default Project;
