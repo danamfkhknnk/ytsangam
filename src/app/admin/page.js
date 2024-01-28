@@ -5,11 +5,10 @@ import AdminContactView from "@/components/admin-view/contact";
 import AdminEducationView from "@/components/admin-view/education";
 import AdminExperienceView from "@/components/admin-view/experience";
 import AdminHomeView from "@/components/admin-view/home";
-import AdminProjectView from "@/components/admin-view/project";
-import { useEffect, useState } from "react";
 import Login from "@/components/admin-view/login";
-
+import AdminProjectView from "@/components/admin-view/project";
 import { addData, getData, login, updateData } from "@/services";
+import { useEffect, useState } from "react";
 
 const initialHomeFormData = {
   heading: "",
@@ -51,12 +50,13 @@ const initialLoginFormData = {
 };
 
 export default function AdminView() {
-  const [currentSelectedTab, setcurentSelectedTab] = useState("home");
+  const [currentSelectedTab, setCurrentSelectedTab] = useState("home");
   const [homeViewFormData, setHomeViewFormData] = useState(initialHomeFormData);
   const [aboutViewFormData, setAboutViewFormData] = useState(initialAboutFormData);
   const [experienceViewFormData, setExperienceViewFormData] = useState(initialExperienceFormData);
   const [educationViewFormData, setEducationViewFormData] = useState(initialEducationFormData);
   const [projectViewFormData, setProjectViewFormData] = useState(initialProjectFormData);
+
   const [allData, setAllData] = useState({});
   const [update, setUpdate] = useState(false);
   const [authUser, setAuthUser] = useState(false);
@@ -76,22 +76,22 @@ export default function AdminView() {
     {
       id: "experience",
       label: "Experience",
-      component: <AdminExperienceView formData={experienceViewFormData} setFormData={setExperienceViewFormData} handleSaveData={handleSaveData} data={allData?.experience} />,
+      component: <AdminExperienceView formData={experienceViewFormData} handleSaveData={handleSaveData} setFormData={setExperienceViewFormData} data={allData?.experience} />,
     },
     {
       id: "education",
-      label: "Eduaction",
-      component: <AdminEducationView formData={educationViewFormData} setFormData={setEducationViewFormData} handleSaveData={handleSaveData} data={allData?.education} />,
+      label: "Education",
+      component: <AdminEducationView formData={educationViewFormData} handleSaveData={handleSaveData} setFormData={setEducationViewFormData} data={allData?.education} />,
     },
     {
       id: "project",
       label: "Project",
-      component: <AdminProjectView formData={projectViewFormData} setFormData={setProjectViewFormData} handleSaveData={handleSaveData} data={allData?.project} />,
+      component: <AdminProjectView formData={projectViewFormData} handleSaveData={handleSaveData} setFormData={setProjectViewFormData} data={allData?.project} />,
     },
     {
       id: "contact",
       label: "Contact",
-      component: <AdminContactView />,
+      component: <AdminContactView data={allData && allData?.contact} />,
     },
   ];
 
@@ -102,10 +102,12 @@ export default function AdminView() {
       setHomeViewFormData(response && response.data[0]);
       setUpdate(true);
     }
+
     if (currentSelectedTab === "about" && response && response.data && response.data.length) {
       setAboutViewFormData(response && response.data[0]);
       setUpdate(true);
     }
+
     if (response?.success) {
       setAllData({
         ...allData,
@@ -162,6 +164,7 @@ export default function AdminView() {
       sessionStorage.setItem("authUser", JSON.stringify(true));
     }
   }
+
   if (!authUser) return <Login formData={loginFormData} handleLogin={handleLogin} setFormData={setLoginFormData} />;
 
   return (
@@ -191,7 +194,7 @@ export default function AdminView() {
           Logout
         </button>
       </nav>
-      <div className="mt-10 pt-10">{menuItems.map((item) => item.id === currentSelectedTab && item.component)}</div>
+      <div className="mt-10 p-10">{menuItems.map((item) => item.id === currentSelectedTab && item.component)}</div>
     </div>
   );
 }
