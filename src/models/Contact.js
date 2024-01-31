@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
 
-const ProjectSchema = new mongoose.Schema(
+const ContactSchema = new mongoose.Schema(
   {
     name: String,
-    website: String,
-    technologies: String,
-    github: String,
+    email: String,
+    message: String,
   },
   { timestamps: true }
 );
 
-const Project = mongoose.models.Project || mongoose.model("Project", ProjectSchema);
+const Contact = mongoose.models.Contacts || mongoose.model("Contacts", ContactSchema);
 
-export default Project;
+export default Contact;
